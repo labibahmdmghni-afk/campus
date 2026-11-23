@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CampusMate - teman produktivitas belajar mahasiswa.">
+  <title>CampusMate — Student Learning Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#" aria-label="CampusMate beranda"><span class="brand-mark">C</span><span>campus<span class="brand-light">mate</span></span></a>
+    <p class="nav-label">MENU UTAMA</p>
+    <nav>
+      <button class="nav-link active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+      <button class="nav-link" data-page="tasks"><span>▤</span> Tugas Saya</button>
+      <button class="nav-link" data-page="schedule"><span>▦</span> Jadwal Kuliah</button>
+      <button class="nav-link" data-page="notes"><span>▧</span> Catatan</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="tip-card"><div class="tip-icon">✦</div><strong>Belajar sedikit demi sedikit.</strong><p>Konsistensi kecil membawa hasil besar.</p></div>
+      <p class="side-foot">CAMPUSMATE © 2026</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="menuToggle" aria-label="Buka menu">☰</button>
+      <div class="crumb">Workspace <span>/</span> <b id="pageCrumb">Dashboard</b></div>
+      <div class="profile"><div class="avatar">M</div><div><b>Mahasiswa</b><small>Student account</small></div></div>
+    </header>
+
+    <section class="page active" id="dashboard">
+      <div class="welcome">
+        <div><p class="eyebrow">MONDAY MOTIVATION ✦</p><h1>Halo, semangat belajar! 👋</h1><p class="muted">Atur aktivitas kuliahmu dan selesaikan satu per satu.</p></div>
+        <div class="date-pill" id="todayDate">Hari ini</div>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total tugas</span><span class="stat-icon purple">▤</span></div><strong id="totalTasks">0</strong><small>Semua tugas tercatat</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Belum selesai</span><span class="stat-icon orange">◷</span></div><strong id="pendingTasks">0</strong><small>Perlu dikerjakan</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Selesai</span><span class="stat-icon green">✓</span></div><strong id="doneTasks">0</strong><small>Good job, pertahankan!</small></article>
+      </div>
+      <div class="content-grid">
+        <article class="panel">
+          <div class="panel-heading"><div><p class="eyebrow">OVERVIEW</p><h2>Produktivitas tugas</h2></div><span class="soft-tag">Progress</span></div>
+          <div class="progress-row"><div><b id="progressPercent">0%</b><span class="muted"> tugas selesai</span></div><span class="muted" id="progressFraction">0 dari 0</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <p class="small-muted">Selesaikan tugas tepat waktu agar aktivitas kuliah lebih teratur.</p>
+        </article>
+        <article class="panel quote-panel"><div class="quote-mark">“</div><h2>Small steps every day lead to big results.</h2><p>Mulai dari satu tugas hari ini.</p><span class="quote-spark">✦ ✦ ✦</span></article>
+      </div>
+      <article class="panel task-panel">
+        <div class="panel-heading"><div><p class="eyebrow">YOUR WORK</p><h2>Tugas terbaru</h2></div><button class="text-button" data-go="tasks">Lihat semua →</button></div>
+        <div id="dashboardTasks" class="task-list"></div>
+      </article>
+    </section>
+
+    <section class="page" id="tasks">
+      <div class="page-heading"><div><p class="eyebrow">STAY ON TRACK</p><h1>Tugas Saya</h1><p class="muted">Catat deadline dan pantau tugas kuliahmu.</p></div><button class="primary-btn" id="addTaskBtn">＋ Tambah tugas</button></div>
+      <div class="panel">
+        <div class="filter-row"><div><h2>Daftar tugas</h2><p class="small-muted">Tugas tersimpan di browser perangkat ini.</p></div><select id="taskFilter" aria-label="Filter tugas"><option value="all">Semua tugas</option><option value="pending">Belum selesai</option><option value="done">Selesai</option></select></div>
+        <div id="allTasks" class="task-list"></div>
+      </div>
+    </section>
+
+    <section class="page" id="schedule">
+      <div class="page-heading"><div><p class="eyebrow">PLAN YOUR WEEK</p><h1>Jadwal Kuliah</h1><p class="muted">Simpan jadwal perkuliahan agar tidak terlewat.</p></div></div>
+      <div class="panel">
+        <div class="panel-heading"><div><h2>Tambah jadwal</h2><p class="small-muted">Isi mata kuliah, hari, dan jam kuliah.</p></div></div>
+        <form id="scheduleForm" class="form-grid">
+          <label>Mata kuliah<input id="courseName" placeholder="Contoh: Manajemen Pemasaran" required></label>
+          <label>Hari<select id="courseDay"><option>Senin</option><option>Selasa</option><option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option></select></label>
+          <label>Jam<input id="courseTime" type="time" required></label>
+          <button class="primary-btn" type="submit">Simpan jadwal</button>
+        </form>
+      </div>
+      <div class="schedule-grid" id="scheduleList"></div>
+    </section>
+
+    <section class="page" id="notes">
+      <div class="page-heading"><div><p class="eyebrow">IDEAS & REMINDERS</p><h1>Catatan</h1><p class="muted">Simpan ide, ringkasan materi, atau pengingat singkat.</p></div></div>
+      <div class="panel">
+        <form id="noteForm" class="note-form"><input id="noteTitle" placeholder="Judul catatan" required><textarea id="noteBody" placeholder="Tulis catatanmu di sini..." rows="4" required></textarea><button class="primary-btn" type="submit">＋ Simpan catatan</button></form>
+      </div>
+      <div class="notes-grid" id="notesList"></div>
+    </section>
+    <footer>Made for students, with focus. <span>CampusMate © 2026</span></footer>
+  </main>
+
+  <dialog id="taskDialog">
+    <form id="taskForm" class="dialog-form">
+      <div class="dialog-heading"><div><p class="eyebrow">NEW TASK</p><h2>Tambah tugas baru</h2></div><button type="button" class="close-btn" id="closeDialog" aria-label="Tutup">×</button></div>
+      <label>Nama tugas<input id="taskTitle" placeholder="Contoh: Makalah Manajemen" required></label>
+      <label>Mata kuliah<input id="taskCourse" placeholder="Contoh: Pengantar Manajemen" required></label>
+      <label>Deadline<input id="taskDeadline" type="date" required></label>
+      <label>Prioritas<select id="taskPriority"><option value="Normal">Normal</option><option value="Penting">Penting</option><option value="Urgent">Urgent</option></select></label>
+      <button class="primary-btn full-btn" type="submit">Simpan tugas</button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
